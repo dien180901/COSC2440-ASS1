@@ -2,9 +2,9 @@ import java.util.Date;
 public class Student {
     private String studentId;
     private String name;
-    private Date birthdate;
+    private String birthdate;
 
-    public Student(String studentId, String name, Date birthdate) {
+    public Student(String studentId, String name, String birthdate) {
         this.studentId = studentId;
         this.name = name;
         this.birthdate = birthdate;
@@ -26,11 +26,15 @@ public class Student {
         this.name = name;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+    public String toString(){
+        return "student id is "+studentId+", student name is "+name+" with "+birthdate+" is the date of birth."+"\n";
+
     }
 }

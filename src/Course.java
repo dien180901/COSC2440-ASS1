@@ -32,4 +32,8 @@ public class Course {
     public void setNumOfCredits(int numOfCredits) {
         this.numOfCredits = numOfCredits;
     }
+    public String toString(){
+        return "class id is "+classId+", class name is "+name+" with "+numOfCredits+" credits. \n";
+
+    }
 }

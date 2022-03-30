@@ -2,9 +2,24 @@ import java.util.ArrayList;
 
 public class AcademicAssistant implements StudentEnrolmentManager{
     private StudentEnrolmentList studentEnrolmentList;
+    private ArrayList<Student> studentList = new ArrayList<Student>();
+    private ArrayList<Student> courseList = new ArrayList<Student>();
+    private ArrayList<Student> semesterList = new ArrayList<Student>();
+
+
+    public AcademicAssistant() {
+        this.studentEnrolmentList = new StudentEnrolmentList();
+    }
 
     public AcademicAssistant(StudentEnrolmentList studentEnrolmentList) {
         this.studentEnrolmentList = studentEnrolmentList;
+    }
+
+    public AcademicAssistant(StudentEnrolmentList studentEnrolmentList, ArrayList<Student> studentList, ArrayList<Student> courseList, ArrayList<Student> semesterList) {
+        this.studentEnrolmentList = studentEnrolmentList;
+        this.studentList = studentList;
+        this.courseList = courseList;
+        this.semesterList = semesterList;
     }
 
     public StudentEnrolmentList getStudentEnrolmentList() {
@@ -13,6 +28,30 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     public void setStudentEnrolmentList(StudentEnrolmentList studentEnrolmentList) {
         this.studentEnrolmentList = studentEnrolmentList;
+    }
+
+    public ArrayList<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(ArrayList<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public ArrayList<Student> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(ArrayList<Student> courseList) {
+        this.courseList = courseList;
+    }
+
+    public ArrayList<Student> getSemesterList() {
+        return semesterList;
+    }
+
+    public void setSemesterList(ArrayList<Student> semesterList) {
+        this.semesterList = semesterList;
     }
 
     @Override
