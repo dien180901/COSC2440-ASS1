@@ -1,7 +1,7 @@
 public interface StudentEnrolmentManager {
-    public boolean add(StudentEnrolmentList studentEnrolmentList){};
-    public boolean update(StudentEnrolmentList studentEnrolmentList){};
-    public boolean delete(StudentEnrolmentList studentEnrolmentList){};
-    public void getOne(StudentEnrolmentList studentEnrolmentList){};
-    public void getAll(StudentEnrolmentList studentEnrolmentList){};
+    public boolean add(StudentEnrolment studentEnrolment);
+    public boolean update(String courseId,String studentId,String semester ,StudentEnrolment updatedStudentEnrolment);
+    public boolean delete(String courseId,String studentId,String semester);
+    public StudentEnrolment getOne(String courseId,String studentId,String semester);
+    public StudentEnrolmentList getAll();
 }
