@@ -1,7 +1,7 @@
 public interface StudentEnrolmentManager {
-    private void add(){};
-    private void update(){};
-    private void delete(){};
-    private void getOne(){};
-    private void getAll(){};
+    private void add(Course course,Student student){};
+    private void update(Course course,Student student){};
+    private void delete(Course course,Student student){};
+    private void getOne(Course course){};
+    private void getAll(Course course){};
 }
