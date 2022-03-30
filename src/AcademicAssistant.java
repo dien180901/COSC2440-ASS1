@@ -17,9 +17,12 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean add( StudentEnrolment studentEnrolment) {
-        ArrayList<StudentEnrolment> s=this.studentEnrolmentList.getListStudentdentEnrolment();
-        s.add(studentEnrolment);
-        return true;
+        if(!this.studentEnrolmentList.getListStudentdentEnrolment().contains(studentEnrolment)) {
+            this.studentEnrolmentList.getListStudentdentEnrolment().add(studentEnrolment);
+
+            return true;
+        }
+        return false;
     }
 
     @Override
