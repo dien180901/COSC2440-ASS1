@@ -11,8 +11,8 @@ public class EnrolmentManager {
     private StudentEnrolmentList studentEnrolmentList=new StudentEnrolmentList();
     private AcademicAssistant academicAssistant=new AcademicAssistant();
     private ArrayList<String> studentIDList = new ArrayList<String>();
-    private ArrayList<String> courseNameList = new ArrayList<String>();
-    private ArrayList<String> semesterList = new ArrayList<String>();
+    private ArrayList<String> courseIDList = new ArrayList<String>();
+
     public  < E > void addToList(ArrayList<E> addedList,E data){
         if (!addedList.contains(data)){
             addedList.add(data);
@@ -56,9 +56,9 @@ public class EnrolmentManager {
                         String semester=".";
                         System.out.println("please enter the semester");
                         String[] semesterListString = Arrays.copyOf(
-                                semesterList.toArray(), semesterList.size(), String[].class);
+                                academicAssistant.getSemesterList().toArray(), academicAssistant.getSemesterList().size(), String[].class);
                         semester=scanner.nextLine();
-                        while ( !containAlphaNum(semester) && isContained(semesterList,semester)){
+                        while ( !containAlphaNum(semester) && isContained(academicAssistant.getSemesterList(),semester)){
                             System.out.println("wrong input or this semester not in the system");
                             System.out.println("this is the semester list "+Arrays.toString(semesterListString));
 
@@ -66,13 +66,13 @@ public class EnrolmentManager {
                         }
 
                         String course=".";
-                        System.out.println("please enter the course");
+                        System.out.println("please enter the courseID");
                         String[] courseListString = Arrays.copyOf(
-                                courseNameList.toArray(), courseNameList.size(), String[].class);
+                                courseIDList.toArray(), courseIDList.size(), String[].class);
                         course=scanner.nextLine();
-                        while ( !onlyContainAlpha(course) && isContained(courseNameList,course)){
+                        while ( !containAlphaNum(course) && isContained(courseIDList,course)){
                             System.out.println("wrong input or this course not in the system");
-                            System.out.println("this is the course list "+Arrays.toString(courseListString));
+                            System.out.println("this is the courseID list "+Arrays.toString(courseListString));
                             course=scanner.nextLine();
                         }
                         boolean isExpectedStudentAndCourse=false;
@@ -80,7 +80,7 @@ public class EnrolmentManager {
 
                             if (s.getStudentId().equals(studentId)){
                                 for (Course c:academicAssistant.getCourseList()){
-                                    if (c.getName().equals(course)){
+                                    if (c.getClassId().equals(course)){
                                         isExpectedStudentAndCourse=true;
                                         StudentEnrolment newStudentEnrolment=new StudentEnrolment(s,c,semester);
                                         academicAssistant.add(newStudentEnrolment);
@@ -104,7 +104,7 @@ public class EnrolmentManager {
         }
 
     }
-    public static void dataProcessing(){
+    public  void dataProcessing(){
         try{
             String path="src/data/default.csv";
             BufferedReader bufferedReader =  new BufferedReader(new FileReader(path));
@@ -112,13 +112,30 @@ public class EnrolmentManager {
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] arrOfStr = line.split(",");
-                System.out.println(Arrays.toString(arrOfStr));
+                Student newStudent= new Student(arrOfStr[0],arrOfStr[1],arrOfStr[2]);
+                Course newCourse= new Course(arrOfStr[3],arrOfStr[4],Integer.parseInt(arrOfStr[5]));
+                String newSemester= arrOfStr[6];
+                if (!studentIDList.contains(arrOfStr[0])){
+                    academicAssistant.getStudentList().add(newStudent);
+                    studentIDList.add(arrOfStr[0]);
+                }
+                if (!courseIDList.contains(arrOfStr[3])){
+                    academicAssistant.getCourseList().add(newCourse);
+                    courseIDList.add(arrOfStr[3]);
+                }
+                if (!academicAssistant.getSemesterList().contains(newSemester)){
+                    academicAssistant.getSemesterList().add(newSemester);
+                }
+                StudentEnrolment newStudentEnrolment= new StudentEnrolment(newStudent,newCourse,newSemester);
+                if (!academicAssistant.getStudentEnrolmentList().getListStudentEnrolment().contains(newStudentEnrolment)){
+                    academicAssistant.add(newStudentEnrolment);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         dataProcessing();
     }
 }
