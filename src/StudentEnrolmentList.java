@@ -9,11 +9,11 @@ public class StudentEnrolmentList {
         this.listStudentEnrolment = listStudentEnrolment;
     }
 
-    public ArrayList<StudentEnrolment> getListStudentdentEnrolment() {
+    public ArrayList<StudentEnrolment> getListStudentEnrolment() {
         return listStudentEnrolment;
     }
 
-    public void setListStudentdentEnrolment(ArrayList<StudentEnrolment> listStudentEnrolment) {
+    public void setListStudentEnrolment(ArrayList<StudentEnrolment> listStudentEnrolment) {
         this.listStudentEnrolment = listStudentEnrolment;
     }
 }

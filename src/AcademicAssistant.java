@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class AcademicAssistant implements StudentEnrolmentManager{
     private StudentEnrolmentList studentEnrolmentList;
     private ArrayList<Student> studentList = new ArrayList<Student>();
-    private ArrayList<Student> courseList = new ArrayList<Student>();
-    private ArrayList<Student> semesterList = new ArrayList<Student>();
+    private ArrayList<Course> courseList = new ArrayList<Course>();
+    private ArrayList<String> semesterList = new ArrayList<String>();
 
 
     public AcademicAssistant() {
@@ -15,7 +15,7 @@ public class AcademicAssistant implements StudentEnrolmentManager{
         this.studentEnrolmentList = studentEnrolmentList;
     }
 
-    public AcademicAssistant(StudentEnrolmentList studentEnrolmentList, ArrayList<Student> studentList, ArrayList<Student> courseList, ArrayList<Student> semesterList) {
+    public AcademicAssistant(StudentEnrolmentList studentEnrolmentList, ArrayList<Student> studentList, ArrayList<Course> courseList, ArrayList<String> semesterList) {
         this.studentEnrolmentList = studentEnrolmentList;
         this.studentList = studentList;
         this.courseList = courseList;
@@ -38,26 +38,26 @@ public class AcademicAssistant implements StudentEnrolmentManager{
         this.studentList = studentList;
     }
 
-    public ArrayList<Student> getCourseList() {
+    public ArrayList<Course> getCourseList() {
         return courseList;
     }
 
-    public void setCourseList(ArrayList<Student> courseList) {
+    public void setCourseList(ArrayList<Course> courseList) {
         this.courseList = courseList;
     }
 
-    public ArrayList<Student> getSemesterList() {
+    public ArrayList<String> getSemesterList() {
         return semesterList;
     }
 
-    public void setSemesterList(ArrayList<Student> semesterList) {
+    public void setSemesterList(ArrayList<String> semesterList) {
         this.semesterList = semesterList;
     }
 
     @Override
     public boolean add( StudentEnrolment studentEnrolment) {
-        if(!this.studentEnrolmentList.getListStudentdentEnrolment().contains(studentEnrolment)) {
-            this.studentEnrolmentList.getListStudentdentEnrolment().add(studentEnrolment);
+        if(!this.studentEnrolmentList.getListStudentEnrolment().contains(studentEnrolment)) {
+            this.studentEnrolmentList.getListStudentEnrolment().add(studentEnrolment);
 
             return true;
         }
@@ -66,10 +66,10 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean update(String courseId,String studentId,String semester,StudentEnrolment updatedStudentEnrolment) {
-        for  (int i =0;i<this.studentEnrolmentList.getListStudentdentEnrolment().size();i+=1){
-            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentdentEnrolment().get(i);
+        for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
+            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
-                this.studentEnrolmentList.getListStudentdentEnrolment().set(i,updatedStudentEnrolment);
+                this.studentEnrolmentList.getListStudentEnrolment().set(i,updatedStudentEnrolment);
                 return true;
             }
         }
@@ -79,10 +79,10 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean delete(String courseId,String studentId,String semester) {
-        for  (int i =0;i<this.studentEnrolmentList.getListStudentdentEnrolment().size();i+=1){
-            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentdentEnrolment().get(i);
+        for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
+            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
-                this.studentEnrolmentList.getListStudentdentEnrolment().remove(i);
+                this.studentEnrolmentList.getListStudentEnrolment().remove(i);
                 return true;
             }
         }
@@ -91,8 +91,8 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public StudentEnrolment getOne(String courseId,String studentId,String semester) {
-        for  (int i =0;i<this.studentEnrolmentList.getListStudentdentEnrolment().size();i+=1){
-            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentdentEnrolment().get(i);
+        for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
+            StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
 
                 return studentEnrolment;
