@@ -32,4 +32,12 @@ public class StudentEnrolment {
     public void setSemester(String semester) {
         this.semester = semester;
     }
+    public String shortToString(){
+//        This is toString function with the id for student and course
+        return "The student with the student id "+this.student.getStudentId()+" enroll the class with the class ID "+ course.getClassId()+" in the semester with id "+semester;
+    }
+    public String FullToString(){
+//        this is toString function which will show the full information of student and course
+        return student.toString()+" enroll the class "+ course.toString()+" in the semester with id "+semester;
+    }
 }

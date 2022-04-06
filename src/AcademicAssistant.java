@@ -56,6 +56,7 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean add( StudentEnrolment studentEnrolment) {
+//        if there is the same StudentEnrolment in our system do not add
         if(!this.studentEnrolmentList.getListStudentEnrolment().contains(studentEnrolment)) {
             this.studentEnrolmentList.getListStudentEnrolment().add(studentEnrolment);
 
@@ -66,6 +67,7 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean update(String courseId,String studentId,String semester,StudentEnrolment updatedStudentEnrolment) {
+//        check if there is any StudentEnrollment have the same studentID and courseID an semester in our system, if have update this studentEnrolment wiht the new value
         for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
             StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
@@ -79,6 +81,7 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public boolean delete(String courseId,String studentId,String semester) {
+//        if there is the StudentEnrolment with the same attribute will delete otther wise return false
         for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
             StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
@@ -91,6 +94,7 @@ public class AcademicAssistant implements StudentEnrolmentManager{
 
     @Override
     public StudentEnrolment getOne(String courseId,String studentId,String semester) {
+//        get the value with same attribut
         for  (int i =0;i<this.studentEnrolmentList.getListStudentEnrolment().size();i+=1){
             StudentEnrolment studentEnrolment=this.studentEnrolmentList.getListStudentEnrolment().get(i);
             if (studentEnrolment.getStudent().getStudentId().equals(studentId) && studentEnrolment.getCourse().getClassId().equals(courseId)&& studentEnrolment.getSemester().equals(semester)){
@@ -100,11 +104,20 @@ public class AcademicAssistant implements StudentEnrolmentManager{
         }
         return null;
     }
-
+    public boolean isContained(String newStudentId,String newCourseId,String newSemester){
+//        chekc if this student enrolment have been in our system
+        for (StudentEnrolment s:studentEnrolmentList.getListStudentEnrolment()){
+            if (s.getSemester().equals(newSemester) && s.getCourse().getClassId().equals(newCourseId) && s.getStudent().getStudentId().equals(newStudentId)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public StudentEnrolmentList getAll() {
         return this.getStudentEnrolmentList();
     }
+//    return all value
 
 
 }

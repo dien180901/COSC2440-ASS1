@@ -33,7 +33,7 @@ public class Course {
         this.numOfCredits = numOfCredits;
     }
     public String toString(){
-        return "class id is "+classId+", class name is "+name+" with "+numOfCredits+" credits. \n";
+        return "class id is "+classId+", class name is "+name+" with "+numOfCredits+" credits.";
 
     }
 }

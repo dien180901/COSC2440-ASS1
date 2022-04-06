@@ -34,7 +34,7 @@ public class Student {
         this.birthdate = birthdate;
     }
     public String toString(){
-        return "student id is "+studentId+", student name is "+name+" with "+birthdate+" is the date of birth."+"\n";
+        return "student id is "+studentId+", student name is "+name+" with "+birthdate+" is the date of birth.";
 
     }
 }
