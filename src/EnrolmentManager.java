@@ -14,9 +14,40 @@ public class EnrolmentManager {
     private ArrayList<String> studentIDList = new ArrayList<String>();
     private ArrayList<String> courseIDList = new ArrayList<String>();
 
+    public StudentEnrolmentList getStudentEnrolmentList() {
+        return studentEnrolmentList;
+    }
+
+    public void setStudentEnrolmentList(StudentEnrolmentList studentEnrolmentList) {
+        this.studentEnrolmentList = studentEnrolmentList;
+    }
+
+    public AcademicAssistant getAcademicAssistant() {
+        return academicAssistant;
+    }
+
+    public void setAcademicAssistant(AcademicAssistant academicAssistant) {
+        this.academicAssistant = academicAssistant;
+    }
+
+    public ArrayList<String> getStudentIDList() {
+        return studentIDList;
+    }
+
+    public void setStudentIDList(ArrayList<String> studentIDList) {
+        this.studentIDList = studentIDList;
+    }
+
+    public ArrayList<String> getCourseIDList() {
+        return courseIDList;
+    }
+
+    public void setCourseIDList(ArrayList<String> courseIDList) {
+        this.courseIDList = courseIDList;
+    }
 
     public EnrolmentManager() {
-
+        dataProcessing();
     }
 
     public  < E > void addToList(ArrayList<E> addedList, E data){
@@ -97,6 +128,7 @@ public class EnrolmentManager {
             message=scanner.nextLine();
             if (message.length()==1 && (message.charAt(0) == '0'|| message.charAt(0) == '1' || message.charAt(0) == '2' || message.charAt(0) == '3')) {
                  if ( message.charAt(0) == '0'){
+                     System.out.println("you have stopped this function");
                     break;
                 }
                 else if ( message.charAt(0) == '1'){
@@ -163,6 +195,7 @@ public class EnrolmentManager {
                 if (message.length()==1){
                     if (message.charAt(0)=='0' ){
                         isStop=true;
+                        System.out.println("you have stopped this function");
                         break;
                     }else if ( message.charAt(0)=='1')
                     {
@@ -231,23 +264,7 @@ public class EnrolmentManager {
             e.printStackTrace();
         }
     }
-    public void addNewEnrolmentOfStudent(Scanner scanner,int indexInEnrollmentList){
-        System.out.println("please enter your new course with courseId else press 0 to break");
-        while (true){
-            String newCourseID=scanner.nextLine();
-            if (newCourseID.length()==1&& newCourseID.charAt(0)=='0'){
-                return;
-            }
-            if(!academicAssistant.getCourseList().contains(newCourseID)){
-                System.out.println("This course ID is not offered in our system, enter your new course with courseId else press 0 to break ");
-                continue;
-            }else{
 
-//                if (listing())
-            }
-        }
-
-    };
     public <E> void modify(Scanner scanner){
         System.out.println("This is the list of enrolment in our system, sorted by student and semester");
         for (String st:studentIDList){
@@ -269,15 +286,16 @@ public class EnrolmentManager {
         boolean isStopChosing=false;
         String expectedStudentId;
         String expectedSemester;
+        String expectedCourse;
         int indexInEnrollmentList=0;
         while (isStopChosing==false){
-            System.out.println("please enter the studentId to choose to update");
-            expectedStudentId=scanner.nextLine();
-            System.out.println("please enter the semester to choose to update");
-            expectedSemester=scanner.nextLine();
+
+            expectedStudentId=enterStudent(scanner);
+            expectedSemester=enterSemester(scanner);
+            expectedCourse=enterCourse(scanner);
             indexInEnrollmentList=0;
             for (StudentEnrolment s:academicAssistant.getStudentEnrolmentList().getListStudentEnrolment()){
-                if (s.getStudent().getStudentId().equals(expectedStudentId) && s.getSemester().equals(expectedSemester)){
+                if (s.getStudent().getStudentId().equals(expectedStudentId) && s.getSemester().equals(expectedSemester)&&s.getCourse().getClassId().equals(expectedCourse)){
                     isStopChosing=true;
                     break;
                 }
@@ -334,6 +352,7 @@ public class EnrolmentManager {
             if (message.length()==1){
                 if (message.charAt(0)=='0' || message.charAt(0)=='1' || message.charAt(0)=='2'){
                     if (message.charAt(0)=='0'){
+                        System.out.println("you have stopped this function");
                         break;
                     }else{
 
@@ -348,6 +367,7 @@ public class EnrolmentManager {
                                 Course newObjectCourse=searchCourseById(updatedCourse);
 
                                 academicAssistant.add(new StudentEnrolment(newObjectStudent,newObjectCourse,updatedSemester));
+                                System.out.println("adding function succesfully");
                             }
 
                         }else if (message.charAt(0)=='2'){
@@ -359,6 +379,7 @@ public class EnrolmentManager {
                                 for (StudentEnrolment s:academicAssistant.getStudentEnrolmentList().getListStudentEnrolment()){
                                     if (s.getStudent().getStudentId().equals(updatedStudent) && s.getSemester().equals(updatedSemester) && s.getCourse().getClassId().equals(updatedCourse)){
                                         academicAssistant.getStudentEnrolmentList().getListStudentEnrolment().remove(s);
+                                        System.out.println("Delete successfully");
                                         break;
                                     }
 
@@ -407,7 +428,7 @@ public class EnrolmentManager {
         // Start scanner
         Scanner in = new Scanner(System.in);
         // User need to enroll a student
-
+        enroll(in);
         while(true) {
             System.out.println("Enter a number to go ahead: "
                     + "\n0 => Enroll a student"
@@ -454,6 +475,7 @@ public class EnrolmentManager {
                     b.add((E)newSemester);
                     listingToCSV("AllCourseInOneSemester.csv",a,b);
                 }else if (message.charAt(0)=='6'){
+                    System.out.println("you have stopped this function");
                     break;
                 }
 
